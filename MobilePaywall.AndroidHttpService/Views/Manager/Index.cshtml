@@ -1,0 +1,112 @@
+﻿@model ManagerModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link href="~/Content/Manager/style.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $(function () {
+      
+      $("#date_from").datepicker({ dateFormat: 'yy-mm-dd' });
+      $("#date_to").datepicker({ dateFormat: 'yy-mm-dd' });
+    
+  } );
+  </script>
+</head>
+<body>
+    <div class="search">
+      <div id="search_top">
+        <label>Top:</label>
+        <select id="select_top">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+      <div id="search_date">
+        <label>From:</label>
+        <input type="text" id="date_from" value="" />
+        <label>To:</label>
+        <input type="text" id="date_to" value="" />
+      </div>
+      <div id="search_country">
+        <label>Country</label>
+        <select id="select_country">
+          <option value="0"></option>
+          @foreach (var item in Model.Countries)
+          {
+            <option value="@item.ID">@item.GlobalName</option>
+          }
+        </select>
+      </div>
+      <div id="search_filter">
+        <input type="button" name="name" id="btnFilter" value="Filter" />
+      </div>
+    </div>
+  <div class="table">
+    <div class="header">
+      <div class="item country">C</div>
+      <div class="item name">Name</div>
+      <div class="item ip_address">IP Address</div>
+      <div class="item msisdn">Msisdn</div>
+      <div class="item referer">Referrer</div>
+      <div class="item created">Created</div>
+    </div>
+    <div id="filteredData">
+      @foreach (var item in Model.Customers)
+      {
+        <div class="items">
+          <div class="item country">
+            <img src="~/Images/_Flags/@string.Format("{0}.png",@item.Country.TwoLetterIsoCode)" alt="Alternate Text" />
+          </div>
+          <div class="item name">@item.AndroidPremiumAplication.Name</div>
+          <div class="item ip_address">@item.IPAddress</div>
+          <div class="item msisdn">@item.Msisdn</div>
+          <div class="item referer">@item.Referrer</div>
+          <div class="item created">@item.Created</div>
+        </div>
+      }
+    </div>
+        
+  </div>
+
+  <div class="filtered">
+
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    $('#btnFilter').click(function () {
+      var top = $('#select_top').val();
+      var from = $('#date_from').val();
+      var to = $('#date_to').val();
+      var country = $('#select_country').val();
+
+      if (from == '' || to == '') {
+        alert("You must set date from and date to!");
+      } else {
+        $.ajax({
+          url: '/Manager/FilterTable',
+          data: { top: top, from: from, to: to, country: country },
+          dataType: 'html',
+          success: function (response) {
+            $('#filteredData').html(response);
+          }
+        });
+      }
+
+    });  
+  });
+</script>
+</html>

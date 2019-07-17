@@ -1,0 +1,78 @@
+﻿body {margin: 0px;font-family: 'Open Sans', sans-serif;font-size:12px;background: #fbfcff;}
+
+#configuration {
+    background-color: #90cfaf;
+    padding:10px;
+    box-shadow:5px 5px 15px rgba(0,0,0,.5);
+}
+#configuration table{ font-size:14px; }
+.input { padding:3px 5px; font:inherit; font-size:14px; width:200px; }
+.btns { padding:5px 20px; }
+
+#data_loading{
+    display:none;
+    position:fixed;
+    width:100%;
+    height:auto;
+    top:50%;
+    text-shadow:1px 1px 1px white;
+    left:0px;
+    text-align:center;
+    vertical-align: middle;
+}
+#data{ margin-top:15px; }
+.device{
+    background-color: #d1d6ec;
+    position:relative;
+    width:250px;
+    height:80px;
+    margin:3px;
+    float:left;
+    padding:5px;
+    text-shadow: 1px 1px 0px #a8caf5;
+    border: 1px solid #969ec1;
+}
+.device_country{
+    position:absolute;
+    width:15px; height:15px; 
+    background-image:url('../../images/_flags/me.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+}
+.device_id{  position:absolute; font-size:35px; color:rgba(255,255,255,.3); bottom:-5px; left:2px; }
+.device_button:hover{background-color:rgba(0,0,0,.1); }
+.device_button{ position:absolute; height:100%; width:30px; background-color:rgba(0,0,0,0); top:0px; left:0px; cursor:hand; cursor:pointer;}
+.device_application{position:absolute;left:35px;top:5px;font-weight:bold;color: #191982;}
+.device_model{ position:absolute; left:35px; top:45px; color:rgba(0,0,0,.6); }
+.device_company{ position:absolute; left:35px; top:30px;}
+.device_msisdn{ position:absolute; left:35px; top:70px;}
+.device_lastPing{ position:absolute; right: 5px; bottom:20px;}
+.device_created{ position:absolute; right: 5px; bottom:5px; color:rgba(0,0,0,.5); }
+
+
+.device_ol_btn:hover{ opacity:1; }
+.device_ol_btn{
+    position:absolute;
+    top:0px;
+    right:0px;
+    font-size:9px;
+    width:30px;
+    text-align:center;
+    background-color: #f3d46b;
+    opacity:.5;
+    cursor:hand;
+    cursor:pointer;
+}
+.device_live_btn:hover{ opacity:1; }
+.device_live_btn{
+    position:absolute;
+    top:12px;
+    right:0px;
+    font-size:9px;
+    width:30px;
+    text-align:center;
+    background-color: #d9ff05;
+    opacity:.5;
+    cursor:hand;
+    cursor:pointer;
+}

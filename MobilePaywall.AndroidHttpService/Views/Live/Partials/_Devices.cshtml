@@ -1,0 +1,24 @@
+﻿@model List<MobilePaywall.AndroidHttpService.Database.DeviceEntry>
+
+@foreach (MobilePaywall.AndroidHttpService.Database.DeviceEntry entry in Model)
+{
+
+  <div class="device" deviceID="@entry.AndroidClientSessionID">
+    <div class="device_country" style="background-image:url('../../../Images/_Flags/@string.Format("{0}.png", entry.CountryCode)');"></div>
+    <div class="device_id">@entry.AndroidClientSessionID</div>
+    <a href="/live/device?sid=@entry.AndroidClientSessionID" target="_blank">
+      <div class="device_button"></div>
+    </a>
+    <div class="device_application">@entry.ApplicationName</div>
+    <div class="device_model">@entry.DeviceName</div>
+    <div class="device_company">@entry.Company</div>
+    <div class="device_msisdn">@entry.Msisdn</div>
+    <div class="device_lastPing">@entry.Created</div>
+    <div class="device_created">@entry.Created</div>
+    <a href="http://ol.app.mobilepaywall.com/Database?aid=@entry.AndroidClientSessionID" target="_blank">
+      <div class="device_ol_btn">OL</div>
+    </a>
+    <div style="clear:both"></div>
+  </div>
+  
+}

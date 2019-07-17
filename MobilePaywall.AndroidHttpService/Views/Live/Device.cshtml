@@ -1,0 +1,153 @@
+﻿@model LiveDeviceModel
+@{
+  Layout = "~/Views/Live/_Layout.cshtml";
+}
+<link href="https://fonts.googleapis.com/css?family=Sintony" rel="stylesheet">
+<link href="~/content/live/device.css" rel="stylesheet" />
+
+<div id="template" style="display:none;">
+  <div class="log log_recent" id="[ID]">
+    <div class="tag">[TAG]</div>
+    <div class="text">[TEXT]</div>
+    <div class="created">[CREATED]</div>
+  </div>
+</div>
+
+<div id="device_informations">
+  <div class="devInfo_box">
+    <div class="devInfo_title">Application name</div>
+    <div class="devInfo_value">@Model.Session.AndroidDistribution.Name</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Application description</div>
+    <div class="devInfo_value">@Model.Session.AndroidDistribution.Description</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Country</div>
+    <div class="devInfo_value">@Model.Session.Country.GlobalName</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Device manifacturer</div>
+    <div class="devInfo_value">@Model.Session.Company</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Model</div>
+    <div class="devInfo_value">@Model.Session.Model</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">SDK</div>
+    <div class="devInfo_value">@Model.Session.VersionSDK</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">OS</div>
+    <div class="devInfo_value">@Model.Session.OSVersion</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Product</div>
+    <div class="devInfo_value">@Model.Session.Product</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Device</div>
+    <div class="devInfo_value">@Model.Session.Device</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">Created</div>
+    <div class="devInfo_value">@Model.Session.Created.ToString()</div>
+  </div>
+  <div class="devInfo_box">
+    <div class="devInfo_title">OL link</div>
+    <div class="devInfo_value">
+      <a href="http://ol.app.mobilepaywall.com/Database?aid=@Model.Session.ID" target="_blank">OL data</a>
+    </div>
+  </div>
+</div>
+
+<div id="content">
+  @foreach (MobilePaywall.Data.AndroidClientLog log in Model.Logs)
+{
+  string klass = log.FromDevice ? "log_in" : "log_out";
+  <div class="log @klass">
+    <div class="tag">@log.Tag</div>
+    <div class="text">@log.Text</div>
+    <div class="created">@log.Created.ToString()</div>
+  </div>
+}
+</div>
+<div id="input">
+  <input type="text" value="" id="textInput" />
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="../signalr/hubs"></script>
+<script type="text/javascript">
+
+  var sessionID = @Model.Session.ID;
+
+  $(document).ready(function () {
+    var live = $.connection.liveDeviceHub;
+    live.client.update = function (data)
+    {
+      if (data.sessionID != '@Model.Session.ID')
+        return;
+      
+      var html = $('#template').html();
+      var id = ID('ne');
+      html = html.replace('[ID]', id);
+      $('#content').prepend(html);
+      $('#' + id).find('.tag').html(data.tag);
+      $('#' + id).find('.text').html(data.text);
+      $('#' + id).find('.created').html(data.created);
+      $('#' + id).addClass(data.fromDevice ? 'log_in' : 'log_out');
+      setTimeout(function(){ $('#' + id).removeClass('log_recent'); }, 5000);
+
+      //html = html.replace('[ID]', id);
+      //html = html.replace("[TAG]", data.tag);
+      //html = html.replace("[TEXT]", data.text);
+      //html = html.replace("[CREATED]", data.created);
+      //html = html.replace("[IN_OUT]", data.fromDevice ? 'in' : 'out');
+      //$('#content').prepend(html);
+    }
+
+    $.connection.hub.start().done(function () { });
+
+    $('#textInput').focus();
+    $('#textInput').on('keypress', function (e) {
+      if (e.which !== 13)
+        return;
+
+      if (typeof $(this).attr('disabled') !== 'undefined')
+        return;
+
+      var elem = $(this);
+      var value = $(this).val();
+      elem.attr('disabled', 'disabled');
+      
+      $.ajax({
+        url: '/live/FirebaseSend',
+        data: { message : value, tokenID : '@Model.Session.TokenID', sessionID: sessionID },
+        method: 'POST',
+        success: function(response)
+        {
+          if (!response.status)
+            alert('error wtih sending');
+
+          elem.removeAttr('disabled');
+          elem.val('');
+          elem.focus();
+        }
+      });
+    });
+
+  });
+
+  function ID (prefix) {
+    if (typeof prefix == undefined) prefix = ""; else prefix += "_";
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 15; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return prefix + text;
+  }
+
+</script>

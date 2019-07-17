@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8B19515-C2A5-4CFC-A3FE-6172CCA69FDF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MobilePaywall.AndroidHttpService</RootNamespace>
+    <AssemblyName>MobilePaywall.AndroidHttpService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\_thirdPartyLibs\log4net-1.2.11\bin\net\4.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Log\AndroidSessionConverter.cs" />
+    <Compile Include="Code\Session\GetSuitableServices.cs" />
+    <Compile Include="Code\Session\SuitableServiceResponse.cs" />
+    <Compile Include="Code\TaskBase\ITask.cs" />
+    <Compile Include="Code\TaskBase\TaskBase.cs" />
+    <Compile Include="Code\TaskBase\TaskExecutionResult.cs" />
+    <Compile Include="Code\TaskBase\TaskManager.cs" />
+    <Compile Include="Code\Tasks\PayTask.cs" />
+    <Compile Include="Code\Tasks\TestTask.cs" />
+    <Compile Include="Code\Trckd\PaywallTrckdContext.cs" />
+    <Compile Include="Controllers\EntranceController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiveApiController.cs" />
+    <Compile Include="Controllers\LiveController.cs" />
+    <Compile Include="Controllers\LoggerController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\PortalController.cs" />
+    <Compile Include="Controllers\PremiumController.cs" />
+    <Compile Include="Database\DevicesEntry.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\LogoConverter.cs" />
+    <Compile Include="Hubs\LiveDeviceHub.cs" />
+    <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\CreateDistributionModel.cs" />
+    <Compile Include="Models\DistributionGroupModel.cs" />
+    <Compile Include="Models\Input\LoadInputData.cs" />
+    <Compile Include="Models\LiveDeviceModel.cs" />
+    <Compile Include="Models\LiveDistributionModel.cs" />
+    <Compile Include="Models\LiveIndexModel.cs" />
+    <Compile Include="Models\ManagerModel.cs" />
+    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalRStartup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\live\devices_list_bck.css" />
+    <Content Include="Content\live\devices_list.css" />
+    <Content Include="Content\Manager\style.css" />
+    <Content Include="Content\Portal\main.css" />
+    <Content Include="Content\Portal\menu.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\_Flags\ad.png" />
+    <Content Include="Images\_Flags\ae.png" />
+    <Content Include="Images\_Flags\af.png" />
+    <Content Include="Images\_Flags\ag.png" />
+    <Content Include="Images\_Flags\ai.png" />
+    <Content Include="Images\_Flags\al.png" />
+    <Content Include="Images\_Flags\am.png" />
+    <Content Include="Images\_Flags\an.png" />
+    <Content Include="Images\_Flags\ao.png" />
+    <Content Include="Images\_Flags\ar.png" />
+    <Content Include="Images\_Flags\as.png" />
+    <Content Include="Images\_Flags\at.png" />
+    <Content Include="Images\_Flags\au.png" />
+    <Content Include="Images\_Flags\aw.png" />
+    <Content Include="Images\_Flags\ax.png" />
+    <Content Include="Images\_Flags\az.png" />
+    <Content Include="Images\_Flags\ba.png" />
+    <Content Include="Images\_Flags\bb.png" />
+    <Content Include="Images\_Flags\bd.png" />
+    <Content Include="Images\_Flags\be.png" />
+    <Content Include="Images\_Flags\bf.png" />
+    <Content Include="Images\_Flags\bg.png" />
+    <Content Include="Images\_Flags\bh.png" />
+    <Content Include="Images\_Flags\bi.png" />
+    <Content Include="Images\_Flags\bj.png" />
+    <Content Include="Images\_Flags\bm.png" />
+    <Content Include="Images\_Flags\bn.png" />
+    <Content Include="Images\_Flags\bo.png" />
+    <Content Include="Images\_Flags\br.png" />
+    <Content Include="Images\_Flags\bs.png" />
+    <Content Include="Images\_Flags\bt.png" />
+    <Content Include="Images\_Flags\bv.png" />
+    <Content Include="Images\_Flags\bw.png" />
+    <Content Include="Images\_Flags\by.png" />
+    <Content Include="Images\_Flags\bz.png" />
+    <Content Include="Images\_Flags\ca.png" />
+    <Content Include="Images\_Flags\catalonia.png" />
+    <Content Include="Images\_Flags\cc.png" />
+    <Content Include="Images\_Flags\cd.png" />
+    <Content Include="Images\_Flags\cf.png" />
+    <Content Include="Images\_Flags\cg.png" />
+    <Content Include="Images\_Flags\ch.png" />
+    <Content Include="Images\_Flags\ci.png" />
+    <Content Include="Images\_Flags\ck.png" />
+    <Content Include="Images\_Flags\cl.png" />
+    <Content Include="Images\_Flags\cm.png" />
+    <Content Include="Images\_Flags\cn.png" />
+    <Content Include="Images\_Flags\co.png" />
+    <Content Include="Images\_Flags\cr.png" />
+    <Content Include="Images\_Flags\cs.png" />
+    <Content Include="Images\_Flags\cu.png" />
+    <Content Include="Images\_Flags\cv.png" />
+    <Content Include="Images\_Flags\cx.png" />
+    <Content Include="Images\_Flags\cy.png" />
+    <Content Include="Images\_Flags\cz.png" />
+    <Content Include="Images\_Flags\de.png" />
+    <Content Include="Images\_Flags\dj.png" />
+    <Content Include="Images\_Flags\dk.png" />
+    <Content Include="Images\_Flags\dm.png" />
+    <Content Include="Images\_Flags\do.png" />
+    <Content Include="Images\_Flags\dz.png" />
+    <Content Include="Images\_Flags\ec.png" />
+    <Content Include="Images\_Flags\ee.png" />
+    <Content Include="Images\_Flags\eg.png" />
+    <Content Include="Images\_Flags\eh.png" />
+    <Content Include="Images\_Flags\england.png" />
+    <Content Include="Images\_Flags\er.png" />
+    <Content Include="Images\_Flags\es.png" />
+    <Content Include="Images\_Flags\et.png" />
+    <Content Include="Images\_Flags\europeanunion.png" />
+    <Content Include="Images\_Flags\fam.png" />
+    <Content Include="Images\_Flags\fi.png" />
+    <Content Include="Images\_Flags\fj.png" />
+    <Content Include="Images\_Flags\fk.png" />
+    <Content Include="Images\_Flags\fm.png" />
+    <Content Include="Images\_Flags\fo.png" />
+    <Content Include="Images\_Flags\fr.png" />
+    <Content Include="Images\_Flags\ga.png" />
+    <Content Include="Images\_Flags\gb.png" />
+    <Content Include="Images\_Flags\gd.png" />
+    <Content Include="Images\_Flags\ge.png" />
+    <Content Include="Images\_Flags\gf.png" />
+    <Content Include="Images\_Flags\gh.png" />
+    <Content Include="Images\_Flags\gi.png" />
+    <Content Include="Images\_Flags\gl.png" />
+    <Content Include="Images\_Flags\gm.png" />
+    <Content Include="Images\_Flags\gn.png" />
+    <Content Include="Images\_Flags\gp.png" />
+    <Content Include="Images\_Flags\gq.png" />
+    <Content Include="Images\_Flags\gr.png" />
+    <Content Include="Images\_Flags\gs.png" />
+    <Content Include="Images\_Flags\gt.png" />
+    <Content Include="Images\_Flags\gu.png" />
+    <Content Include="Images\_Flags\gw.png" />
+    <Content Include="Images\_Flags\gy.png" />
+    <Content Include="Images\_Flags\hk.png" />
+    <Content Include="Images\_Flags\hm.png" />
+    <Content Include="Images\_Flags\hn.png" />
+    <Content Include="Images\_Flags\hr.png" />
+    <Content Include="Images\_Flags\ht.png" />
+    <Content Include="Images\_Flags\hu.png" />
+    <Content Include="Images\_Flags\id.png" />
+    <Content Include="Images\_Flags\ie.png" />
+    <Content Include="Images\_Flags\il.png" />
+    <Content Include="Images\_Flags\in.png" />
+    <Content Include="Images\_Flags\io.png" />
+    <Content Include="Images\_Flags\iq.png" />
+    <Content Include="Images\_Flags\ir.png" />
+    <Content Include="Images\_Flags\is.png" />
+    <Content Include="Images\_Flags\it.png" />
+    <Content Include="Images\_Flags\jm.png" />
+    <Content Include="Images\_Flags\jo.png" />
+    <Content Include="Images\_Flags\jp.png" />
+    <Content Include="Images\_Flags\ke.png" />
+    <Content Include="Images\_Flags\kg.png" />
+    <Content Include="Images\_Flags\kh.png" />
+    <Content Include="Images\_Flags\ki.png" />
+    <Content Include="Images\_Flags\km.png" />
+    <Content Include="Images\_Flags\kn.png" />
+    <Content Include="Images\_Flags\kp.png" />
+    <Content Include="Images\_Flags\kr.png" />
+    <Content Include="Images\_Flags\kw.png" />
+    <Content Include="Images\_Flags\ky.png" />
+    <Content Include="Images\_Flags\kz.png" />
+    <Content Include="Images\_Flags\la.png" />
+    <Content Include="Images\_Flags\lb.png" />
+    <Content Include="Images\_Flags\lc.png" />
+    <Content Include="Images\_Flags\li.png" />
+    <Content Include="Images\_Flags\lk.png" />
+    <Content Include="Images\_Flags\lr.png" />
+    <Content Include="Images\_Flags\ls.png" />
+    <Content Include="Images\_Flags\lt.png" />
+    <Content Include="Images\_Flags\lu.png" />
+    <Content Include="Images\_Flags\lv.png" />
+    <Content Include="Images\_Flags\ly.png" />
+    <Content Include="Images\_Flags\ma.png" />
+    <Content Include="Images\_Flags\mc.png" />
+    <Content Include="Images\_Flags\md.png" />
+    <Content Include="Images\_Flags\me.png" />
+    <Content Include="Images\_Flags\mg.png" />
+    <Content Include="Images\_Flags\mh.png" />
+    <Content Include="Images\_Flags\mk.png" />
+    <Content Include="Images\_Flags\ml.png" />
+    <Content Include="Images\_Flags\mm.png" />
+    <Content Include="Images\_Flags\mn.png" />
+    <Content Include="Images\_Flags\mo.png" />
+    <Content Include="Images\_Flags\mp.png" />
+    <Content Include="Images\_Flags\mq.png" />
+    <Content Include="Images\_Flags\mr.png" />
+    <Content Include="Images\_Flags\ms.png" />
+    <Content Include="Images\_Flags\mt.png" />
+    <Content Include="Images\_Flags\mu.png" />
+    <Content Include="Images\_Flags\mv.png" />
+    <Content Include="Images\_Flags\mw.png" />
+    <Content Include="Images\_Flags\mx.png" />
+    <Content Include="Images\_Flags\my.png" />
+    <Content Include="Images\_Flags\mz.png" />
+    <Content Include="Images\_Flags\na.png" />
+    <Content Include="Images\_Flags\nc.png" />
+    <Content Include="Images\_Flags\ne.png" />
+    <Content Include="Images\_Flags\nf.png" />
+    <Content Include="Images\_Flags\ng.png" />
+    <Content Include="Images\_Flags\ni.png" />
+    <Content Include="Images\_Flags\nl.png" />
+    <Content Include="Images\_Flags\no.png" />
+    <Content Include="Images\_Flags\no_flag.png" />
+    <Content Include="Images\_Flags\np.png" />
+    <Content Include="Images\_Flags\nr.png" />
+    <Content Include="Images\_Flags\nu.png" />
+    <Content Include="Images\_Flags\nz.png" />
+    <Content Include="Images\_Flags\om.png" />
+    <Content Include="Images\_Flags\pa.png" />
+    <Content Include="Images\_Flags\pe.png" />
+    <Content Include="Images\_Flags\pf.png" />
+    <Content Include="Images\_Flags\pg.png" />
+    <Content Include="Images\_Flags\ph.png" />
+    <Content Include="Images\_Flags\pk.png" />
+    <Content Include="Images\_Flags\pl.png" />
+    <Content Include="Images\_Flags\pm.png" />
+    <Content Include="Images\_Flags\pn.png" />
+    <Content Include="Images\_Flags\pr.png" />
+    <Content Include="Images\_Flags\ps.png" />
+    <Content Include="Images\_Flags\pt.png" />
+    <Content Include="Images\_Flags\pw.png" />
+    <Content Include="Images\_Flags\py.png" />
+    <Content Include="Images\_Flags\qa.png" />
+    <Content Include="Images\_Flags\re.png" />
+    <Content Include="Images\_Flags\readme.txt" />
+    <Content Include="Images\_Flags\ro.png" />
+    <Content Include="Images\_Flags\rs.png" />
+    <Content Include="Images\_Flags\ru.png" />
+    <Content Include="Images\_Flags\rw.png" />
+    <Content Include="Images\_Flags\sa.png" />
+    <Content Include="Images\_Flags\sb.png" />
+    <Content Include="Images\_Flags\sc.png" />
+    <Content Include="Images\_Flags\scotland.png" />
+    <Content Include="Images\_Flags\sd.png" />
+    <Content Include="Images\_Flags\se.png" />
+    <Content Include="Images\_Flags\sg.png" />
+    <Content Include="Images\_Flags\sh.png" />
+    <Content Include="Images\_Flags\si.png" />
+    <Content Include="Images\_Flags\sj.png" />
+    <Content Include="Images\_Flags\sk.png" />
+    <Content Include="Images\_Flags\sl.png" />
+    <Content Include="Images\_Flags\sm.png" />
+    <Content Include="Images\_Flags\sn.png" />
+    <Content Include="Images\_Flags\so.png" />
+    <Content Include="Images\_Flags\sr.png" />
+    <Content Include="Images\_Flags\st.png" />
+    <Content Include="Images\_Flags\sv.png" />
+    <Content Include="Images\_Flags\sy.png" />
+    <Content Include="Images\_Flags\sz.png" />
+    <Content Include="Images\_Flags\tc.png" />
+    <Content Include="Images\_Flags\td.png" />
+    <Content Include="Images\_Flags\tf.png" />
+    <Content Include="Images\_Flags\tg.png" />
+    <Content Include="Images\_Flags\th.png" />
+    <Content Include="Images\_Flags\tj.png" />
+    <Content Include="Images\_Flags\tk.png" />
+    <Content Include="Images\_Flags\tl.png" />
+    <Content Include="Images\_Flags\tm.png" />
+    <Content Include="Images\_Flags\tn.png" />
+    <Content Include="Images\_Flags\to.png" />
+    <Content Include="Images\_Flags\tr.png" />
+    <Content Include="Images\_Flags\tt.png" />
+    <Content Include="Images\_Flags\tv.png" />
+    <Content Include="Images\_Flags\tw.png" />
+    <Content Include="Images\_Flags\tz.png" />
+    <Content Include="Images\_Flags\ua.png" />
+    <Content Include="Images\_Flags\ug.png" />
+    <Content Include="Images\_Flags\uk.png" />
+    <Content Include="Images\_Flags\um.png" />
+    <Content Include="Images\_Flags\us.png" />
+    <Content Include="Images\_Flags\uy.png" />
+    <Content Include="Images\_Flags\uz.png" />
+    <Content Include="Images\_Flags\va.png" />
+    <Content Include="Images\_Flags\vc.png" />
+    <Content Include="Images\_Flags\ve.png" />
+    <Content Include="Images\_Flags\vg.png" />
+    <Content Include="Images\_Flags\vi.png" />
+    <Content Include="Images\_Flags\vn.png" />
+    <Content Include="Images\_Flags\vu.png" />
+    <Content Include="Images\_Flags\wales.png" />
+    <Content Include="Images\_Flags\wf.png" />
+    <Content Include="Images\_Flags\ws.png" />
+    <Content Include="Images\_Flags\ye.png" />
+    <Content Include="Images\_Flags\yt.png" />
+    <Content Include="Images\_Flags\za.png" />
+    <Content Include="Images\_Flags\zm.png" />
+    <Content Include="Images\_Flags\zw.png" />
+    <Content Include="Content\live\device.css" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\android.app.mobilepaywall.com.pubxml" />
+    <Content Include="Scripts\bootstrap-confirmation.min.js" />
+    <Content Include="Scripts\bootstrap-popover.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\live\LiveDevices.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_jq.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Live\Index.cshtml" />
+    <Content Include="Views\Live\_Layout.cshtml" />
+    <Content Include="Views\Live\Device.cshtml" />
+    <Content Include="Views\Live\Partials\_Devices.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Live\DistributionGroup.cshtml" />
+    <Content Include="Views\Live\OneDistributionGroup.cshtml" />
+    <Content Include="Views\Live\AllDistribution.cshtml" />
+    <Content Include="Views\Live\Distribution.cshtml" />
+    <Content Include="Views\Live\CreateDistributionGroup.cshtml" />
+    <Content Include="Views\Live\CreateDistribution.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\Partials\_Customers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Trckd.v1\trunk\Trckd.Client.Web\Trckd.Client.Web.csproj">
+      <Project>{34df3f61-1c89-46e8-8948-0aa562bc1619}</Project>
+      <Name>Trckd.Client.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Trckd.v1\trunk\Trckd.Client\Trckd.Client.csproj">
+      <Project>{5483d9f0-da7a-44d4-9f14-53d91efc3b1e}</Project>
+      <Name>Trckd.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Trckd.v1\trunk\Trckd.Message\Trckd.Message.csproj">
+      <Project>{37e961ae-47de-401b-8edb-bf6712a6d7a6}</Project>
+      <Name>Trckd.Message</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projects\MobilePaywall\trunk\MobilePaywall.Core.Sql\MobilePaywall.Core.Sql.csproj">
+      <Project>{82a22140-e04d-46cd-bdd4-6b81c83ab9af}</Project>
+      <Name>MobilePaywall.Core.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projects\MobilePaywall\trunk\MobilePaywall.Core\MobilePaywall.Core.csproj">
+      <Project>{4e086f05-dedb-4399-8876-c988cb6cddc8}</Project>
+      <Name>MobilePaywall.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projects\Senti\trunk\Senti.Core\Senti.Core.csproj">
+      <Project>{fc2aa55a-f0ca-423a-8f45-2f21fc6982ce}</Project>
+      <Name>Senti.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projects\Senti\trunk\Senti.Data\Senti.Data.csproj">
+      <Project>{ffa64eb3-3d17-4dc1-8b8f-1e4b884ac7e5}</Project>
+      <Name>Senti.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61513</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61513/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,18 @@
+﻿@model ManagerModel
+
+
+@foreach (var item in Model.Customers)
+{
+  <div class="items">
+    <div class="item country">
+      <img src="~/Images/_Flags/@string.Format("{0}.png",@item.Country.TwoLetterIsoCode)" alt="Alternate Text" />
+    </div>
+    <div class="item name">@item.AndroidPremiumAplication.Name</div>
+    <div class="item ip_address">@item.IPAddress</div>
+    <div class="item msisdn">@item.Msisdn</div>
+    <div class="item referer">@item.Referrer</div>
+    <div class="item created">@item.Created</div>
+  </div>
+}
+
+

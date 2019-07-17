@@ -1,0 +1,36 @@
+﻿@model DistributionGroupModel
+  
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+  
+<input class="btn btn-info" id="bacButton" style="margin:20px;" value="Back" onclick="window.location.href = '/Live';" />
+<input class="btn btn-success" id="bacButton" style="margin:20px;" value="Create Distribution Group" onclick="window.location.href = '/Live/CreateDistributionGroup'" />
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Descrption</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var dg in @Model.DistributionGroups)
+    {
+      <tr>
+        <td>@dg.ID</td>
+        <td>@dg.Name</td>
+        <td>@dg.Description</td>
+        <td>
+        <input class="btn btn-default" type="button" id="editDistributionGroup" value="Edit Distribution Group" onclick="location.href='@Url.Action("OneDistributionGroup", "Live", new { id = @dg.ID })'"/>
+        <input class="btn btn-default" type="button" id="viewAllDistributionGroup" value="View All Distribution" onclick="location.href='@Url.Action("AllDistribution", "Live", new { id= @dg.ID})'" />
+        <input class="btn btn-default" type="button" id="deleteDistributionGroup" value="Delete Distribution Group" onclick="location.href='@Url.Action("ApiDeleteDistributionGroup", "Live", new { id = @dg.ID })'" />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<script>
+
+</script>

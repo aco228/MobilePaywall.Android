@@ -1,0 +1,44 @@
+﻿@model LiveDistributionModel
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<style>
+  .image {width:auto; height:25px; background-position:center; background-size:contain; background-repeat:no-repeat;}
+</style>
+
+<input class="btn btn-info" id="bacButton" style="margin:20px;" value="Back" onclick="window.location.href = '/Live/DistributionGroup';" />
+<input class="btn btn-success" id="createButton" style="margin:20px;" value="Create Distribution" onclick="window.location.href = '/Live/CreateDistribution/' + @Model.AndroidGroup.ID;" />
+ 
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Logo</th>
+      <th>Group Name</th>
+      <th>Name</th>
+      <th>Descrption</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var dg in @Model.AndroidDistributions)
+    {
+      <tr>
+        <td>@dg.ID</td>
+        <td>
+          <div class="image" style="background-image:url(/Live/DistributionLogo?id=@dg.ID)"></div>
+        </td>
+        <td>@dg.AndroidDistributionGroup.Name</td>
+        <td>@dg.Name</td>
+        <td>@dg.Description</td>
+        <td>
+          <input class="btn btn-default" type="button" id="editDistribution" value="Edit Distribution" onclick="location.href='@Url.Action("Distribution", "Live", new { id = @dg.ID })'" />
+             <input class="btn btn-default" type="button" id="deleteDistribution" value="Delete Distribution" onclick="location.href='@Url.Action("ApiDeleteDistribution", "Live", new { id = @dg.ID })'" />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<script src="~/Scripts/bootstrap-confirmation.min.js"></script>

@@ -1,0 +1,59 @@
+﻿@model LiveIndexModel
+@{
+  Layout = "~/Views/Live/_Layout.cshtml";
+
+  DateTime yesterday = DateTime.Now.AddDays(-1);
+  DateTime tomorrow = DateTime.Now.AddDays(1);
+  DateTime from = new DateTime(yesterday.Year, yesterday.Month, yesterday.Day, 0, 0, 0);
+  DateTime to = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 7, 0, 0);
+}
+<link href="~/content/live/devices_list.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="~/scripts/live/LiveDevices.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+<script src="signalr/hubs"></script>
+
+<div id="configuration">
+
+  <table>
+    <tr>
+      <td>Top</td>
+      <td>Country</td>
+      <td>Application</td>
+      <td>From</td>
+      <td>To</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td> <input type="number" class="input" id="input_top" value="50" /> </td>
+      <td> <input type="text" class="input" id="input_country" /> </td>
+      <td>
+        <select class="input" id="input_application">
+          <option value="-1"></option>
+          @foreach (MobilePaywall.Data.AndroidDistribution app in Model.Distributions)
+          {
+            <option value="@app.ID">@app.Name</option>
+          }
+        </select> 
+      </td>
+      <td> <input type="text" class="input" id="input_from" value="@from"/> </td>
+      <td> <input type="text" class="input" id="input_to" value="@to" /> </td>
+      <td> <button id="btnSubmit" class="btns">Submit</button> </td>
+      <td> <input type="button" class="btns" value="Distribution Groups" onclick="location.href='@Url.Action("DistributionGroup","Live")'" /> </td>
+     
+    </tr>
+  </table>
+</div>
+
+<div id="data_loading"> Loading... </div>
+<div id="data">
+
+</div>
+
+<script>
+  var _manager = null;
+  $(document).ready(function () {
+    _manager = new LiveDevices();
+    _manager.load();
+  });
+</script>

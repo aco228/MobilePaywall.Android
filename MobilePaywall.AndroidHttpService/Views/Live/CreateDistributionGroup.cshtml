@@ -1,0 +1,54 @@
+﻿
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<input hidden class="text" id="distributionID" value="" />
+
+<input class="btn btn-info" id="bacButton" style="margin:20px;" value="Back" onclick="window.location.href = '/Live/DistributionGroup';" />
+
+<div style="width:50%;margin:10px;">
+  <div class="form-group">
+    <label for="exampleInputName2">Name</label>
+    <input type="text" class="form-control" id="distributionGroupName" value="">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2">Description</label>
+    <input type="text" class="form-control" id="distributionGroupDescription" value="">
+  </div>
+
+  <input class="btn btn-default" type="button" id="createDistributionGroup" value="Create Distribution Group" />
+</div>
+
+<script>
+
+  $(document).ready(function () {
+    createDistributionGroup();
+  });
+
+  function createDistributionGroup() {
+    $('#createDistributionGroup').click(function (e) {
+      e.preventDefault();
+      var name = $('#distributionGroupName').val();
+      var description = $('#distributionGroupDescription').val();
+
+      $.ajax({
+        url: "/Live/ApiCreateDistributionGroup",
+        type: "POST",
+        data: {
+          name: name,
+          description: description
+        },
+        success: function (data) {
+          console.log(data);
+          window.location.href = "/Live/DistributionGroup";
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+
+
+    });
+  }
+
+</script>

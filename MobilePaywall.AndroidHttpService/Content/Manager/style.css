@@ -1,0 +1,67 @@
+﻿body{
+  font-family: 'Lato', sans-serif;
+  font-size:13px;
+}
+
+.table{
+  display: table;
+  width: auto
+}
+.header{
+  background: linear-gradient(to right, #4CA1AF, #C4E0E5);
+  display: table-row;
+  width:auto;
+  clear:both;
+  
+  text-align:center;
+}
+.items{
+  background: linear-gradient(to right, #C9D6FF,#E2E2E2);
+  display: table-row;
+  width:auto;
+  clear:both;
+  text-align:center;
+
+}
+.items:hover{
+  background: linear-gradient(to right, #56CCF2,#2F80ED);
+  cursor:pointer;
+  color:white;
+}
+
+.item{
+   float:left;
+   display:table-column;
+   width:200px;
+   height:20px;
+   border: 1px solid rgba(84, 84, 84, 0.1);
+   
+}
+.country{
+  width:50px;
+}
+
+.search{
+  padding-top:19px;
+  position:relative;
+  width:1062px;
+  height:40px;
+}
+#search_top{
+  position:absolute;
+  width:100px;
+}
+#search_date{
+  position:absolute;
+  left: 150px;
+  width:500px;
+}
+#search_country{
+  position:absolute;
+  left: 700px;
+  width:200px;
+}
+#search_filter{
+  position:absolute;
+  right: 5px;
+}
